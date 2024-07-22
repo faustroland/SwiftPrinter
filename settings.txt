@@ -1,0 +1,3 @@
+color_import_delay=0.3
+button_delay=1
+data_chunk_size=200000
