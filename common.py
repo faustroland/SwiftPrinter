@@ -351,6 +351,16 @@ def waitForMenu(name,pos):
     grabSquareAtPosition(name+"_fail",pos[name])
     return False
 
+def waitForMenu2(name,pos):
+    for i in range(10):
+        r,exceeded_points = compareSquareAtPosition(name,pos[name])
+        if r:
+            return True, exceeded_points
+        print("waiting for "+ name +" menu to appear")
+        sleep(0.1)
+    grabSquareAtPosition(name+"_fail",pos[name])
+    return False, exceeded_points
+
 def click(position=[1920/2,1080/2],amount=1):
     getActiveWindow()
     x,y=position

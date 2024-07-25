@@ -7,17 +7,20 @@ import pyperclip as pc #pip install pyperclip
 import os
 from zipfile import ZipFile 
 from common import *
+from colors import *
+from tables import *
 
 color_checking_coords: List[Tuple[int, int]] = [(10,10),(20,20)]
 
 def waitForMenu(name,pos):
     for i in range(10):
-        r = compareSquareAtPosition(name,pos[name])
+        r,exceeded_points = compareSquareAtPosition(name,pos[name])
         if r:
-            break
+            return True
         print("waiting for "+ name +" menu to appear")
         sleep(0.1)
     grabSquareAtPosition(name+"_fail",pos[name])
+    return False
 
 def click(position=[1920/2,1080/2],amount=1):
     getActiveWindow()
@@ -43,6 +46,17 @@ def rightclick(position=[1920/2,1080/2],amount=1):
         time.sleep(0.025)
         win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP,x,y,0,0)
         time.sleep(0.01)
+
+def scrollup(pos):
+    getActiveWindow()
+    x,y=pos["Recolor_Tool_Setings"]
+    x=int(x)
+    y=int(y)
+    win32api.SetCursorPos((x,y))
+    time.sleep(0.025)
+    for i in range(10):
+        win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, x, y, 1, 0)
+        time.sleep(0.025)
 
 
 def kp(key,length=0.1,wait=0.1):
@@ -111,6 +125,7 @@ def saveRoomFromMP(f):
     click(pos["Save"])
 
 def split_file(input_file, chunk_size):
+    print("Data chunk size: ", chunk_size)
     with open(input_file, 'r',encoding="utf-8") as file:
         lines = file.readlines()
     l = 0
@@ -144,7 +159,7 @@ def split_file(input_file, chunk_size):
     return textchunks
 
 def getStatus(pos):
-    getActiveWindow
+    getActiveWindow()
     x,y = pos["STATUS"]
     image = ImageGrab.grab()
     RGB = image.load()[x,y]
@@ -167,13 +182,14 @@ def getColorAt(pos):
 def press(key):
     kp(VK_CODE[key])
 
-def dropMakerPen(delay):
+def dropMakerPen(delay=1):
     press("z")
     sleep(delay)
 
-def makerPenMenu(delay):
+def makerPenMenu(delay=1):
     press("f")
     sleep(delay)
+
 
 
 def enterData():
@@ -183,102 +199,30 @@ def enterData():
     c_delay = float(settings["color_import_delay"])
     b_delay = float(settings["button_delay"])
     data_chunk_size = int(settings["data_chunk_size"])
-    
     path=os.getcwd()
     files=os.listdir(path)
     files=[f for f in files if ".png.zip" in f]
+    name = ""
     print(files)
-    #prepared for batch importing, currently cut out
-    for f in files[0:1]:
-        print(str(f))
-        print("extracting: ",f)
-        with ZipFile(f,"r") as zObject:
-            zObject.extractall(path)
+    if 0==len(files):
+        print("No file for import")
+        return False
+    f = files[0]
+    print(str(f))
+    print("extracting: ",f)
+    name=f
+    with ZipFile(f,"r") as zObject:
+        zObject.extractall(path)
 
-        chunks = split_file("image_data.txt",data_chunk_size)
-        colors = load_colors("image_hex.txt")
-        lenchunks=len(chunks)
-        lencolors=len(colors)
-        print(f"Importing {lencolors} colors and {lenchunks} TABLES")
-        getActiveWindow()
-
-
-        dropMakerPen(1)
-        makerPen()
-        makerPenMenu(1)
-#        waitForMenu("MP_tools",pos)
-        click(pos["MP_tools"])
-        sleep(1)
-        click(pos["RecolorButt"])
-        escape()
-
-
-        iC = 0
-        circuitsClicked = False
-        
-        kp(0x5A) #Z
-        sleep(2)
-        for i in range(len(chunks)):
-            print(i)
-            getActiveWindow()
-            
-            for y in range(i):
-                rightclick([1920/2,1080/2],1)
-                sleep(0.5)
-                
-            makerPen()
-            sleep(1)
-            kp(0x46) #F
-            sleep(2)
-            click(pos["MP_tools"])
-            sleep(2)
-            click(pos["MP_configure"])
-            sleep(1)
-            escape()
-            sleep(1)
-            click()
-            sleep(2)
-            click(pos["Edit_Data_Table_Button"])
-            sleep(3)
-            click(pos["DataTable_Enter_BOX"])
-            sleep(2)
-            click(pos["DATA_field"])                    
-            sleep(4)
-            ctrlA()
-            sleep(1)
-            ctrlA()
-            sleep(1)
-            kp(0x2E)
-            sleep(1)
-            paste(chunks[i])
-            print("Sleep 45")
-            sleep(45)
-            click(pos["GENERATE"])
-            sleep(10)
-
-            while(True):
-                if (getStatus(pos) == 300):
-                    sleep(8)
-                    break
-                else:
-                    sleep(0.1)
-        kp(0x5A) #Z
-        sleep(6)    
-        makerPen()
-        sleep(1)
-        kp(0x46) #F
-        click(pos["MP_tools"])
-        sleep(2)
-        click(pos["MP_configure"])
-        sleep(1)
-        click(pos["Circuits"])
-        sleep(1)
-        click(pos["TestEvent"])
-        kp(0x46) #F
-        # move data file to done folder
-        src = path + "\\" + f
-        dest = path + "\\done\\" + f
-        os.rename(src, dest)
+    chunks = split_file("image_data.txt",data_chunk_size)
+    colors = load_colors("image_hex.txt")
+    lenchunks=len(chunks)
+    lencolors=len(colors)
+    print(f"Importing {lencolors} colors and {lenchunks} TABLES")
+#    getActiveWindow()
+    
+    importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks)
+    return "tampName"
 
 
 def waitForDone():    
@@ -322,71 +266,29 @@ PRINTING_DONE = 200
 
 
 if __name__ == "__main__":
+    yes = {'yes','y', 'ye', ''}
+    no = {'no','n'}
+    choice = input("Is this a shirt? [Y/N]: ").lower()
+    if choice in yes:
+       shirt=True
+    elif choice in no:
+       shirt=False
+    else:
+       sys.stdout.write("Please respond with 'yes' or 'no'")
+       
     pos=load_positions("positions.txt")
-   
-    status = getStatus(pos)
-    state = UNDECIDED
 
+    name = enterData()
+    
 
     while(True):
-        getActiveWindow()
-        if state == UNDECIDED:
-            print("UNDECIDED")
-            sleep(1)
-            status = getStatus(pos)
-            if status==SEATED:
-                state = ENTERING_DATA
-                continue
-            elif status == ROOM_LOADED:
-                state = UNDECIDED
-                continue
-            elif status ==PRINTING:
-                state = PRINTING
-                continue
-            elif status == PRINTING_DONE:
-                state = SAVING
-                continue
-            sleep(10)
-            
-        if state == ENTERING_DATA:
-            print("ENTERING DATA")
-            enterData()
-            while(True):
-                if getStatus(pos)== PRINTING:
-                    state = PRINTING
-                    break
-                sleep(1)
-
-
-        if state == PRINTING:
-            print("PRINTING")
-            status = getStatus(pos)
-            print(state)
-            if status == PRINTING_DONE:
-                 state = SAVING
-                 continue
-
-            sleep(10)
-            state = UNDECIDED
-
-        if state == SAVING:
-            print("SAVING")
-            saveRoomFromMP("DONE")
-            while(True):
-                if getStatus(pos)== ROOM_LOADED:
-                    state = DONE
-                    break
-                sleep(1)
-
-        if state == ERROR:
-            print("ERROR")
-            ## TODO solve error
+        status = getStatus(pos)
+       # print(state)
+        if status == PRINTING_DONE:
             break
 
-        if state == DONE:
-            print("DONE")
-            break
+    if not shirt:
+        saveRoomFromMP(name)
 
-        sleep(1)
             
     input("Press ENTER to exit")

@@ -1,5 +1,5 @@
 color_import_delay=0.3
 button_delay=1
-data_chunk_size=100000
+data_chunk_size=150000
 position_resolution=1920
 my_resolution=1920

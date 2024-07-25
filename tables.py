@@ -31,23 +31,35 @@ def importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks):
             escape()
             sleep(1)
             click()
-            sleep(2)
+            sleep(1)
             click(pos["Edit_Data_Table_Button"])
-            sleep(3)
+            sleep(1)
             click(pos["DataTable_Enter_BOX"])
             while not waitForMenu("DATA_TABLE_LOADED",pos):
                 sleep(1)
-            click(pos["DATA_field"])                    
+            click(pos["DATA_field"])
             sleep(4)
             ctrlA()
-            sleep(1)
+            sleep(0.1)
             ctrlA()
-            sleep(1)
             kp(0x2E) #delete
-            sleep(1)
+            while True:
+                getActiveWindow()
+                r,exceeded_points = waitForMenu2("DATA_TABLE_DATA_FIELD",pos)
+                if r:
+                        break
+                print("exceeded_points: ",exceeded_points)
+                sleep(1)
+                    
             paste(chunks[i])
-            print("Sleep 45")
-            sleep(45)
+            while True:
+                getActiveWindow()
+                r,exceeded_points = waitForMenu2("DATA_TABLE_DATA_FIELD",pos)
+                if not r:
+                        break
+                print("exceeded_points: ",exceeded_points)
+                sleep(1)
+                
             click(pos["GENERATE"])
             sleep(10)
 
