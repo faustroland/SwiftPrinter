@@ -345,6 +345,7 @@ def waitForMenu(name,pos):
     for i in range(10):
         r,exceeded_points = compareSquareAtPosition(name,pos[name])
         if r:
+            grabSquareAtPosition(name+"_success",pos[name])
             return True
         print("waiting for "+ name +" menu to appear")
         sleep(0.1)
@@ -355,6 +356,7 @@ def waitForMenu2(name,pos):
     for i in range(10):
         r,exceeded_points = compareSquareAtPosition(name,pos[name])
         if r:
+            grabSquareAtPosition(name+"_success",pos[name])
             return True, exceeded_points
         print("waiting for "+ name +" menu to appear")
         sleep(0.1)

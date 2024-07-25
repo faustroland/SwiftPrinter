@@ -52,6 +52,7 @@ def importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks):
                 sleep(1)
                     
             paste(chunks[i])
+            i = 0
             while True:
                 getActiveWindow()
                 r,exceeded_points = waitForMenu2("DATA_TABLE_DATA_FIELD",pos)
@@ -59,6 +60,9 @@ def importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks):
                         break
                 print("exceeded_points: ",exceeded_points)
                 sleep(1)
+                i+=1
+                if i>40:
+                        break
                 
             click(pos["GENERATE"])
             sleep(10)

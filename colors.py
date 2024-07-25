@@ -52,20 +52,14 @@ def importColors(pos,settings,c_delay,b_delay,colors):
                     circuitsClicked=True
                 click(pos["RoomReset"])
                 sleep(0.1)
-                kp(0x46) #Press F, close maker pen
-                sleep(0.1)
-                kp(0x5A) #Z drop maker penn
-                sleep(0.1)
-                kp(0x20) # space, jump out of the seat
-                sleep(0.1)
                 sleep(6)
-                makerPen()
+                makerPen() # Open Maker Pen
                 sleep(1)
                 kp(0x46) #F
                 sleep(1)
                 click(pos["MP_tools"])
                 sleep(1)
-                click(pos["RecolorButt"])
+                click(pos["Custom"])
                 escape()
                 for qq in range(iC):
                     rightclick([1920/2,1080/2])
