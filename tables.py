@@ -8,11 +8,11 @@ import os
 from zipfile import ZipFile 
 from common import *
 
-def importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks):    
+def importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks,xtable=0):    
 
         kp(0x5A) #Z
         sleep(2)
-        for i in range(len(chunks)):
+        for i in range(xtable,len(chunks)):
             print(i)
             getActiveWindow()
             
@@ -31,18 +31,19 @@ def importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks):
             escape()
             sleep(1)
             click()
-            sleep(1)
+            sleep(3)
             click(pos["Edit_Data_Table_Button"])
-            sleep(1)
+            sleep(3)
             click(pos["DataTable_Enter_BOX"])
             while not waitForMenu("DATA_TABLE_LOADED",pos):
                 sleep(1)
             click(pos["DATA_field"])
-            sleep(4)
+            sleep(5)
             ctrlA()
             sleep(0.1)
             ctrlA()
             kp(0x2E) #delete
+            sleep(5)
             while True:
                 getActiveWindow()
                 r,exceeded_points = waitForMenu2("DATA_TABLE_DATA_FIELD",pos)
