@@ -192,7 +192,7 @@ def makerPenMenu(delay=1):
 
 
 
-def enterData():
+def enterData(xtable=0):
     pos=load_positions("positions.txt")
     
     settings = load_settings("settings.txt")
@@ -221,7 +221,7 @@ def enterData():
     print(f"Importing {lencolors} colors and {lenchunks} TABLES")
 #    getActiveWindow()
     
-    importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks)
+    importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks,xtable)
     return "tampName"
 
 
@@ -269,6 +269,7 @@ if __name__ == "__main__":
     yes = {'yes','y', 'ye', ''}
     no = {'no','n'}
     choice = input("Is this a shirt? [Y/N]: ").lower()
+    xtab=int(input("table:"))
     if choice in yes:
        shirt=True
     elif choice in no:
@@ -278,7 +279,7 @@ if __name__ == "__main__":
        
     pos=load_positions("positions.txt")
 
-    name = enterData()
+    name = enterData(xtab)
     
 
     while(True):
