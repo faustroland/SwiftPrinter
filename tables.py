@@ -67,6 +67,11 @@ def importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks,xtable=0):
                 
             click(pos["GENERATE"])
             sleep(10)
+            r,exceeded_points = compareSquareAtPosition("DATA_TABLE_LOADED",pos)
+            while r:
+                click(pos["GENERATE"])
+                sleep(10)
+                r,exceeded_points = compareSquareAtPosition("DATA_TABLE_LOADED",pos)   
 
             while(True):
                 if (getStatus(pos) == 300):
