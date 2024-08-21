@@ -268,8 +268,13 @@ PRINTING_DONE = 200
 if __name__ == "__main__":
     yes = {'yes','y', 'ye', ''}
     no = {'no','n'}
-    choice = input("Is this a shirt? [Y/N]: ").lower()
-    xtab=int(input("table:"))
+    choice = input("Is this a shirt? [Y/n]: ").lower()
+    xtab=input("table[0]:")
+    if len(xtab)==0:
+        xtab=0
+    else:
+        xtab=int(xtab)
+
     if choice in yes:
        shirt=True
     elif choice in no:
