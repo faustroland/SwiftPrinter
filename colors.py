@@ -8,7 +8,7 @@ import os
 from zipfile import ZipFile 
 from common import *
 
-def importColors(pos,settings,c_delay,b_delay,colors):
+def importColors(pos,settings,c_delay,b_delay,colors,startat):
     getActiveWindow()
 
 
@@ -26,6 +26,9 @@ def importColors(pos,settings,c_delay,b_delay,colors):
     circuitsClicked = False
     # Recoloring 
     for color in colors:
+        if iC<startat:
+            iC=iC+1
+            continue
         print("")  
         print(color)
         getActiveWindow()

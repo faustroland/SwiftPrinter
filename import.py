@@ -192,7 +192,7 @@ def makerPenMenu(delay=1):
 
 
 
-def enterData():
+def enterData(startat):
     pos=load_positions("positions.txt")
     
     settings = load_settings("settings.txt")
@@ -221,7 +221,7 @@ def enterData():
     print(f"Importing {lencolors} colors and {lenchunks} TABLES")
 #    getActiveWindow()
     
-    importColors(pos,settings,c_delay,b_delay,colors)
+    importColors(pos,settings,c_delay,b_delay,colors,startat)
     importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks)
     return "tampName"
 
@@ -270,6 +270,11 @@ if __name__ == "__main__":
     yes = {'yes','y', 'ye', ''}
     no = {'no','n'}
     choice = input("Is this a shirt? [Y/N]: ").lower()
+    startat=(input("Start at marker [0]: ").lower())
+    if len(startat)==0:
+        startat=0
+    else:
+        startat=int(startat)
     if choice in yes:
        shirt=True
     elif choice in no:
@@ -283,7 +288,7 @@ if __name__ == "__main__":
  #   status = getStatus(pos)
  #   state = UNDECIDED
 
-    name = enterData()
+    name = enterData(startat)
     
 
     while(True):
