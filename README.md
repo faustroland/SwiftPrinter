@@ -1,11 +1,9 @@
-#SwiftPrinter v0.6.0
+# SwiftPrinter v0.6.0
 
-###by FaustRoland
+### by FaustRoland
 
-
-Fast: Most prints are finished in an hour.
-
-Cheap: 50 tokens per print (see below)
+ - Fast: Most prints are finished in an hour.
+ - Cheap: 50 tokens per print (see below)
 
 Check it yourself in room: SwiftPrinterDemo
 
@@ -75,8 +73,6 @@ Run the import.py and switch to RecRoom
 
 You can specify from which marker you want to start in case some catastrophic import failure (212 markers is quite a lot to start over)
 
-
-
 The script import the colors first and then imports the data as well automatically.
 
 Or at least try. There is an ongoing issue with the Data Tables causing to lag/crash the game if there is too much data pasted into the table.
@@ -86,23 +82,20 @@ If you encounter such behaviour, try to lower the size of entered data. Open set
 
 Once the data is entered, the script attempts to start printing.
 
-
-
-
-
 If you run into troubles with Data Table Import, you can run onlyTables.py which imports only data and you may specify from which table ou want to start.
 
 If everything fails, there is a manualTables.py which exports the image_data into separate files, so you can import it manually.
 
 
 
-Canvas print: 
+
+### Canvas print: 
 
 Spawn "Swift Printer Canvas Pos" and make your canvas roughly same size. (It's outside the dorm), then you can delete it.
 
 
 
-###T-shirt printing:
+### T-shirt print:
 
 You need to set the board correctly
 
