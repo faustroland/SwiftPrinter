@@ -9,7 +9,9 @@ Check it yourself in room: **SwiftPrinterDemo**
 
 
 Import now works only if you have resolution 1920x1080
+
 You have to have python installed
+
 Join [Printing discord](https://discord.gg/GuzwRMsyW8)
 
 
