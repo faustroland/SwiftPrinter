@@ -35,7 +35,7 @@ Connect the Printer with the execute pins on input and output.
 Save and reload/reset the room. It seats you properly.
 
 
-Note: Once you import all colors it switch you to importing data. Once the print finishes, the seat will switch back to color importing.
+Note: Once you import all colors it switches you to importing data. Once the print finishes, the seat will switch back to color importing.
 
 If you want to go back down to color import manually. Send Test Event with parameter "down" (or if zou want to go up to tables, send parameter "up")
 
@@ -80,7 +80,7 @@ Or at least try. There is an ongoing issue with the Data Tables causing to lag/c
 If you encounter such behaviour, try to lower the size of entered data. Open settings.txt and change the "data_chunk_size". The default value is 100000, if I run into troubles, I set it to half (50000).
 
 
-Once the data is entered, the script attempts to start printing.
+Once the data is entered, the script attempts to start printing. If its canvas, keep the script open, it will save the room once the print finishes.
 
 If you run into troubles with Data Table Import, you can run onlyTables.py which imports only data and you may specify from which table ou want to start.
 
@@ -99,27 +99,28 @@ Spawn "Swift Printer Canvas Pos" and make your canvas roughly same size. (It's o
 
 You need to set the board correctly
 
+You need to set SHIRT pin to TRUE and set FRONT, BACK according where on the shirt you want to print.
+
 https://youtu.be/kOr8Plvj5mE?si=O1XNpNfCO4iU8oga
 
 
 
-Price: 
+### Price: 
 
 50 tokens per print (kind of*)
 
 Currently free in the "beta" until I get rid of bugs. (You can still buy the license as a donation)
 
 
-
 Printer requires a license key to start printing, but keeps printing when the license expires during the print. 
 
 
 
-Go to SwiftPrinter room to generate your license.
-
+Go to **SwiftPrinter** room to generate your license.
 
 
 You can use RR tokens or Swift Tokens (currently obtainable by hanging out in the room, but planning fun activities to get them)
+The licence room can host only one person, but there is a "hangout area" where you can invite friends ig´ you want to chat/chill and collect Swift Tokens.
 
 
 *The license is bound to your account and is valid for an hour/day/week/month. So it's up to you how many images are you able to start printing within an hour.
