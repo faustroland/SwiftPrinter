@@ -17,6 +17,13 @@ Join [Printing discord](https://discord.gg/GuzwRMsyW8)
 
 ## Tutorial:
 
+0) Install libraries for python
+```
+pip install pywin32
+pip install pyautogui
+pip install pyperclip
+```
+
 1) Go to **SwiftPrinter** room and grab all inventions from the link buttons
  - Swift Printer 0.6.1
  - Swift Printer Data 0.6.0
