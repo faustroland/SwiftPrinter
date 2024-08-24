@@ -51,7 +51,7 @@ Note: Once you import all colors it switches you to importing data. Once the pri
 
 If you want to go back down to color import manually. Send Test Event with parameter "down" (or if zou want to go up to tables, send parameter "up")
 
-[Fig.4 Image of Send Test Event with parameter down](readme/Fig4.png)
+![Fig.4 Image of Send Test Event with parameter down](readme/Fig4.png)
 
 
 
@@ -68,7 +68,7 @@ Do not use it when you see there LOAD 100% (wait a minute and reload the page)
 
 Download import script from here - Click green Code button on the up left and click Download Zip.
 
-[Fig.5 Download Zip](readme/Fig4.png)
+![Fig.5 Download Zip](readme/Fig5.png)
 
 
 
