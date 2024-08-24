@@ -34,7 +34,7 @@ Connect the Printer with the Data Table chip under it (A to A, B to B, you will 
 
 Connect the Printer with the execute pins on input and output.
 
-[Fig.3 Image of connected pins]
+![Fig.3 Image of connected pins](readme/Gif1.gif)
 
 Save and reload/reset the room. It seats you properly.
 
