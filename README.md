@@ -120,7 +120,7 @@ Go to **SwiftPrinter** room to generate your license.
 
 
 You can use RR tokens or Swift Tokens (currently obtainable by hanging out in the room, but planning fun activities to get them)
-The licence room can host only one person, but there is a "hangout area" where you can invite friends ig´ you want to chat/chill and collect Swift Tokens.
+The licence room can host only one person, but there is a "hangout area" where you can invite friends if you want to chat/chill and collect Swift Tokens.
 
 
 *The license is bound to your account and is valid for an hour/day/week/month. So it's up to you how many images are you able to start printing within an hour.
