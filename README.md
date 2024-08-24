@@ -22,7 +22,7 @@ Go to **SwiftPrinter** room and grab all inventions from the link buttons
  - Swift Printer Data 0.6.0
  - 212 Markers (split to four inventions due ink limitations)
  - Swift Printer Canvas Pos (just tamplate to show where and how big the canvas should be)
-![Fig.1 Image of Link Buttons](readme/Fig2.png)
+![Fig.1 Image of Link Buttons](readme/Fig1.png)
 
 Empty your Dorm
 (don't use Delete All button, is bugged)
