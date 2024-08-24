@@ -17,26 +17,28 @@ Join [Printing discord](https://discord.gg/GuzwRMsyW8)
 
 ## Tutorial:
 
-Go to **SwiftPrinter** room and grab all inventions from the link buttons
+1) Go to **SwiftPrinter** room and grab all inventions from the link buttons
  - Swift Printer 0.6.1
  - Swift Printer Data 0.6.0
  - 212 Markers (split to four inventions due ink limitations)
  - Swift Printer Canvas Pos (just tamplate to show where and how big the canvas should be)
 ![Fig.1 Image of Link Buttons](readme/Fig1.png)
 
-Empty your Dorm
+2) Empty your Dorm
 (don't use Delete All button, is bugged)
 ![Fig.2 Image of Reset Dorm on Rec.Net](readme/Fig2.png)
 
-Spawn all inventions from the Preview in Store. 
+3) Spawn all inventions from the Preview in Store. 
 
-Connect the Printer with the Data Table chip under it (A to A, B to B, you will figure the rest). 
+4) Connect the Printer with the Data Table chip under it (A to A, B to B, you will figure the rest). 
 
-Connect the Printer with the execute pins on input and output.
+5) Connect the Printer with the execute pins on
+input and output.
 
-![Fig.3 Image of connected pins](readme/Gif1.gif)
+    ![Fig.3 Image of connected pins](readme/Gif1.gif)
 
-Save and reload/reset the room. It seats you properly.
+
+7) Save and reload/reset the room. It seats you properly.
 
 
 Note: Once you import all colors it switches you to importing data. Once the print finishes, the seat will switch back to color importing.
