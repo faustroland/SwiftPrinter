@@ -124,3 +124,6 @@ The licence room can host only one person, but there is a "hangout area" where y
 
 
 *The license is bound to your account and is valid for an hour/day/week/month. So it's up to you how many images are you able to start printing within an hour.
+
+
+## TODO: Breakdown if the individual chip options
