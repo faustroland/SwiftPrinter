@@ -26,13 +26,19 @@ Join [Printing discord](https://discord.gg/GuzwRMsyW8)
 
 2) Empty your Dorm
 (don't use Delete All button, is bugged)
-![Fig.2 Image of Reset Dorm on Rec.Net](readme/Fig2.png)
 
-3) Spawn all inventions from the Preview in Store. 
+    ![Fig.2 Image of Reset Dorm on Rec.Net](readme/Fig2.png)
 
-4) Connect the Printer with the Data Table chip under it (A to A, B to B, you will figure the rest). 
+   
+  
 
-5) Connect the Printer with the execute pins on
+
+    
+4) Spawn all inventions from the Preview in Store. 
+
+5) Connect the Printer with the Data Table chip under it (A to A, B to B, you will figure the rest). 
+
+6) Connect the Printer with the execute pins on
 input and output.
 
     ![Fig.3 Image of connected pins](readme/Gif1.gif)
@@ -45,7 +51,7 @@ Note: Once you import all colors it switches you to importing data. Once the pri
 
 If you want to go back down to color import manually. Send Test Event with parameter "down" (or if zou want to go up to tables, send parameter "up")
 
-[Fig.4 Image of Send Test Event with parameter down]
+[Fig.4 Image of Send Test Event with parameter down](readme/Fig4.png)
 
 
 
@@ -62,7 +68,7 @@ Do not use it when you see there LOAD 100% (wait a minute and reload the page)
 
 Download import script from here - Click green Code button on the up left and click Download Zip.
 
-[Fig.5 Download Zip]
+[Fig.5 Download Zip](readme/Fig4.png)
 
 
 
