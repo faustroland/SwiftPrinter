@@ -5,7 +5,7 @@
  - Fast: Most prints are finished in an hour.
  - Cheap: 50 tokens per print (see below)
 
-Check it yourself in room: SwiftPrinterDemo
+Check it yourself in room: **SwiftPrinterDemo**
 
 
 Import now works only if you have resolution 1920x1080 
@@ -13,7 +13,7 @@ Import now works only if you have resolution 1920x1080
 
 ## Tutorial:
 
-Go to SwiftPrinter room and grab all inventions from the link buttons
+Go to **SwiftPrinter** room and grab all inventions from the link buttons
  - Swift Printer 0.6.1
  - Swift Printer Data 0.6.0
  - 212 Markers (split to four inventions due ink limitations)
@@ -37,7 +37,7 @@ Save and reload/reset the room. It seats you properly.
 
 Note: Once you import all colors it switch you to importing data. Once the print finishes, the seat will switch back to color importing.
 
-If you want to go back down to color import manually. Send Test Event with parameter "down"
+If you want to go back down to color import manually. Send Test Event with parameter "down" (or if zou want to go up to tables, send parameter "up")
 
 [Fig.4 Image of Send Test Event with parameter down]
 
