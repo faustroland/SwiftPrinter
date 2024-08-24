@@ -26,7 +26,7 @@ Go to **SwiftPrinter** room and grab all inventions from the link buttons
 
 Empty your Dorm
 (don't use Delete All button, is bugged)
-[Fig.2 Image of Reset Dorm on Rec.Net]
+![Fig.2 Image of Reset Dorm on Rec.Net](readme/Fig2.png)
 
 Spawn all inventions from the Preview in Store. 
 
