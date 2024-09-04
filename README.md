@@ -22,6 +22,7 @@ Join [Printing discord](https://discord.gg/GuzwRMsyW8)
 pip install pywin32
 pip install pyautogui
 pip install pyperclip
+pip install Pillow
 ```
 
 1) Go to **SwiftPrinter** room and grab all inventions from the link buttons
