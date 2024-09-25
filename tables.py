@@ -17,7 +17,7 @@ def importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks,xtable=0):
             getActiveWindow()
             
             for y in range(i):
-                rightclick([1920/2,1080/2],1)
+                rightclick([int(screensize[0]/2),int(screensize[1]/2)],1)
                 sleep(0.5)
                 
             makerPen()
@@ -68,9 +68,11 @@ def importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks,xtable=0):
             click(pos["GENERATE"])
             sleep(10)
             r,exceeded_points = compareSquareAtPosition("DATA_TABLE_LOADED",pos["DATA_TABLE_LOADED"])
+            prd = 0
             while r:
                 click(pos["GENERATE"])
-                sleep(10)
+                sleep(20+prd)
+                prd=prd+10
                 r,exceeded_points = compareSquareAtPosition("DATA_TABLE_LOADED",pos["DATA_TABLE_LOADED"])   
 
             while(True):

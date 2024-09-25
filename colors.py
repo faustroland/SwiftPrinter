@@ -10,14 +10,16 @@ from common import *
 
 def importColors(pos,settings,c_delay,b_delay,colors,startat):
     getActiveWindow()
-
+    user32 = ctypes.windll.user32
+    screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 
     dropMakerPen(1)
     makerPen() #open
     makerPenMenu(1)
     click(pos["MP_tools"]) # click the Maker Pen "Tools" button
     sleep(1)
-    click(pos["MP_configure"]) # yes, a butt joke
+    click(pos["MP_configure"])
+    sleep(1)
     scrollup(pos)
     escape() #close
 
@@ -38,10 +40,11 @@ def importColors(pos,settings,c_delay,b_delay,colors,startat):
             continue
 
         while(True):  # here is handled the transition to the next marker
+            sleep(0.2)
             position = getStatus(pos)
             print("My position:",position)
             if position < iC: 
-                rightclick([1920/2,1080/2])
+                rightclick([int(screensize[0]/2),int(screensize[1]/2)])
                 sleep(0.2)
             elif position > iC: ## this part handles an "overclick" when you are ahead, it resets the room and starts over 
                 makerPenMenu(1) #open
@@ -65,12 +68,12 @@ def importColors(pos,settings,c_delay,b_delay,colors,startat):
                 click(pos["Custom"])
                 escape()
                 for qq in range(iC):
-                    rightclick([1920/2,1080/2])
+                    rightclick([int(screensize[0]/2),int(screensize[1]/2)])
                     sleep(0.2)
             else:
                 break
             
-        click([1920/2,1080/2],1)
+        click([int(screensize[0]/2),int(screensize[1]/2)],1)
         
         waitForMenu("MARKER_MULTICOLOR_CONFIG_MENU",pos)
         waitForMenu("MULTICOLOR_COLOR_BUTTON",pos)
@@ -94,4 +97,4 @@ def importColors(pos,settings,c_delay,b_delay,colors,startat):
         iC=iC+1
 
     sleep(c_delay)
-    rightclick([1920/2,1080/2],1)
+    rightclick([int(screensize[0]/2),int(screensize[1]/2)],1)

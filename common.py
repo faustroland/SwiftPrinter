@@ -10,6 +10,8 @@ import pyautogui
 import pyperclip
 from PIL import ImageGrab, Image, ImageChops
 import pyperclip as pc #pip install pyperclip
+import ctypes
+
 
 
 def setup_logger(level=logging.DEBUG, disable_imported: bool = False) -> logging.Logger:
@@ -308,12 +310,13 @@ def sleep(t):
 def grabSquareAtPosition(name,pos):
     image = ImageGrab.grab()
     X,Y = pos
-    square_A = 60
-    half = square_A/2
+    res_X = ctypes.windll.user32.GetSystemMetrics(0)
+    square_A = int(60 / 1920 * res_X)
+    half = int(square_A/2)
 
     bbox = (X-half,Y-half,X+square_A,Y+square_A)
     sub_image = image.crop(bbox)
-    sub_image.save("data/"+name+".png")
+    sub_image.save("data/"+name+"_"+str(res_X)+".png")
 
 
 
@@ -332,9 +335,10 @@ def images_are_equal(img1,img2):
 def compareSquareAtPosition(name,pos):
     image = ImageGrab.grab()
     X,Y = pos
-    square_A = 60
-    half = square_A/2
-    template_name = "data/"+name+".png"
+    res_X = ctypes.windll.user32.GetSystemMetrics(0)
+    square_A = int(60 / 1920 * res_X)
+    half = int(square_A/2)
+    template_name = "data/"+name+"_"+str(res_X)+".png"
     template = Image.open(template_name)
 
     bbox = (X-half,Y-half,X+square_A,Y+square_A)
@@ -363,26 +367,35 @@ def waitForMenu2(name,pos):
     grabSquareAtPosition(name+"_fail",pos[name])
     return False, exceeded_points
 
-def click(position=[1920/2,1080/2],amount=1):
-    getActiveWindow()
-    x,y=position
-    x=int(x)
-    y=int(y)
-    win32api.SetCursorPos((x,y))
-    time.sleep(0.025)
-    for loop in range(0,amount):
-        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,x,y,0,0)
-        time.sleep(0.025)
-        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,x,y,0,0)
-        time.sleep(0.025)
+user32 = ctypes.windll.user32
+screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 
-def rightclick(position=[1920/2,1080/2],amount=1):
+def click(position=[int(ctypes.windll.user32.GetSystemMetrics(0)/2),int(ctypes.windll.user32.GetSystemMetrics(1)/2)],amount=1):
+    getActiveWindow()
+    x,y=position
+    x=int(x)
+    y=int(y)
+    try:
+        win32api.SetCursorPos((x,y))
+        time.sleep(0.025)
+        for loop in range(0,amount):
+            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,x,y,0,0)
+            time.sleep(0.025)
+            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,x,y,0,0)
+            time.sleep(0.025)
+    except:
+        print("Unable to move mouse, wait and try again")
+        sleep(10)
+        click(position,amount) # viva la recursion!
+
+def rightclick(position=[int(ctypes.windll.user32.GetSystemMetrics(0)/2),int(ctypes.windll.user32.GetSystemMetrics(1)/2)],amount=1):
     getActiveWindow()
     x,y=position
     x=int(x)
     y=int(y)
     win32api.SetCursorPos((x,y))
     for loop in range(0,amount):
+        print("rightclick")
         win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN,x,y,0,0)
         time.sleep(0.025)
         win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP,x,y,0,0)
@@ -418,9 +431,17 @@ def enter():
 
 def makerPen():
     getActiveWindow()
+    #get res
+    user32 = ctypes.windll.user32
+    screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+    #
     win32api.keybd_event(0x31,0,0,0)
     sleep(0.5)
-    win32api.SetCursorPos((int(1920/2)-200,int(1080/2)+100))
+    x_diff = int(200*screensize[0]/1920)
+    y_diff = int(100*screensize[1]/1080)
+    
+    
+    win32api.SetCursorPos((int(screensize[0]/2)-x_diff,int(screensize[1]/2)+y_diff))
     sleep(0.1)
     win32api.keybd_event (0x31,0, win32con.KEYEVENTF_KEYUP, 0)
     sleep(0.1)
@@ -452,7 +473,7 @@ def load_colors(file_path):
             colors.append(line.strip())
     return colors
 
-def saveRoomFromMP(f):
+def saveRoomFromMP(f,pos):
     getActiveWindow()
     kp(0x46) #F
     sleep(4)

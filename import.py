@@ -22,31 +22,6 @@ def waitForMenu(name,pos):
     grabSquareAtPosition(name+"_fail",pos[name])
     return False
 
-def click(position=[1920/2,1080/2],amount=1):
-    getActiveWindow()
-    x,y=position
-    x=int(x)
-    y=int(y)
-    win32api.SetCursorPos((x,y))
-    time.sleep(0.025)
-    for loop in range(0,amount):
-        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,x,y,0,0)
-        time.sleep(0.025)
-        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,x,y,0,0)
-        time.sleep(0.025)
-
-def rightclick(position=[1920/2,1080/2],amount=1):
-    getActiveWindow()
-    x,y=position
-    x=int(x)
-    y=int(y)
-    win32api.SetCursorPos((x,y))
-    for loop in range(0,amount):
-        win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN,x,y,0,0)
-        time.sleep(0.025)
-        win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP,x,y,0,0)
-        time.sleep(0.01)
-
 def scrollup(pos):
     getActiveWindow()
     x,y=pos["Recolor_Tool_Setings"]
@@ -75,15 +50,6 @@ def enter():
     getActiveWindow()
     kp(0x0D,0.1,0.1)
 
-def makerPen():
-    getActiveWindow()
-    win32api.keybd_event(0x31,0,0,0)
-    sleep(0.5)
-    win32api.SetCursorPos((int(1920/2)-200,int(1080/2)+100))
-    sleep(0.1)
-    win32api.keybd_event (0x31,0, win32con.KEYEVENTF_KEYUP, 0)
-    sleep(0.1)
-
 def load_positions(file_path):
     settings = {}
     with open(file_path, 'r') as file:
@@ -94,108 +60,27 @@ def load_positions(file_path):
             settings[key.strip()] = tuple(map(int, value.strip().split(',')))
     return settings
 
-def load_settings(file_path):
-    settings = {}
-    with open(file_path, 'r') as file:
-        for line in file:
-            # Split each line by '='
-            key, value = line.strip().split('=')
-            settings[key.strip()] = value
-    return settings
-
-def load_colors(file_path):
-    colors = []
-    with open(file_path, 'r') as file:
-        for line in file:
-            # Split each line by '='
-            colors.append(line.strip())
-    return colors
-
-def saveRoomFromMP(f):
-    getActiveWindow()
-    kp(0x46) #F
-    sleep(4)
-    click(pos["MP_ThisRoom"])
-    sleep(4)
-    click(pos["SaveRoom"])
-    sleep(4)
-    click(pos["SaveDescription"])
-    paste(str(f))
-    sleep(4)
-    click(pos["Save"])
-
-def split_file(input_file, chunk_size):
-    print("Data chunk size: ", chunk_size)
-    with open(input_file, 'r',encoding="utf-8") as file:
-        lines = file.readlines()
-    l = 0
-    start=0
-    end = 0
-    chunks = []
-    for i in range(len(lines)):
-        lines[i]=lines[i].strip()
-        l = l + len(lines[i])
-        if l>chunk_size:
-            chunks.append((lines[start:i]))
-            start = i
-            l=0
-    chunks.append((lines[start:-1]))
-    textchunks = []
-    lenchunks = len(chunks)
-    rnd = "0"
-    for i in range(len(chunks)):
-        if i==0:
-            chunks[0][0] = chunks[0][0] + ";"+str(lenchunks)
-            q = chunks[0][0].split(";")
-            rnd = q[4]
-            print(chunks[0][0])
-            print(rnd)
-            textchunks.append("\n".join(chunks[0]))
-        else:
-            chunks[i].insert(0,str(i)+";"+rnd)
-            textchunks.append("\n".join(chunks[i]))
-            
-    
-    return textchunks
-
-def getStatus(pos):
-    getActiveWindow()
-    x,y = pos["STATUS"]
-    image = ImageGrab.grab()
-    RGB = image.load()[x,y]
-    R,G,B=RGB
-    R=int(round((R-13)/2**5))
-    G=int(round((G-13)/2**5))
-    B=int(round((B-13)/2**5))
-    val=R<<6|G<<3|B
-    return(val)
-
-def getColorAt(pos):
-    getActiveWindow
-    x,y = pos
-    image = ImageGrab.grab()
-    RGB = image.load()[x,y]
-    R,G,B=RGB
-    val=R<<16|G<<8|B
-    return(val)
-
-def press(key):
-    kp(VK_CODE[key])
-
-def dropMakerPen(delay=1):
-    press("z")
-    sleep(delay)
-
-def makerPenMenu(delay=1):
-    press("f")
-    sleep(delay)
-
-
-
 def enterData(startat):
-    pos=load_positions("positions.txt")
-    
+
+#    res_affair_17 = [1920,1366,1600,2560,3840]
+#    res_affair_16 = [1440,1280]
+    pos=load_positions("positions.txt")   
     settings = load_settings("settings.txt")
+    user32 = ctypes.windll.user32
+    my_res = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+    pos_res = list(map(int,settings["position_resolution"].split(",")))
+    
+    if my_res[0]!=pos_res[0]:
+        print("Recalculating coordinates")
+        for i in pos:
+            x,y = pos[i]
+            new_x = int(x*my_res[0]/pos_res[0])
+            new_y = int(y*my_res[1]/pos_res[1])
+            pos[i] = [new_x,new_y]
+ 
+        
+
+    
     c_delay = float(settings["color_import_delay"])
     b_delay = float(settings["button_delay"])
     data_chunk_size = int(settings["data_chunk_size"])
@@ -222,6 +107,7 @@ def enterData(startat):
 #    getActiveWindow()
     
     importColors(pos,settings,c_delay,b_delay,colors,startat)
+    saveRoomFromMP("Colors",pos)
     importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks)
     return "tampName"
 
@@ -269,7 +155,7 @@ PRINTING_DONE = 200
 if __name__ == "__main__":
     yes = {'yes','y', 'ye', ''}
     no = {'no','n'}
-    choice = input("Is this a shirt? [Y/N]: ").lower()
+    choice = input("Is this a shirt? [Y/n]: ").lower()
     startat=(input("Start at marker [0]: ").lower())
     if len(startat)==0:
         startat=0
@@ -283,6 +169,19 @@ if __name__ == "__main__":
        sys.stdout.write("Please respond with 'yes' or 'no'")
        
     pos=load_positions("positions.txt")
+    settings = load_settings("settings.txt")
+    my_res = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+    pos_res = list(map(int,settings["position_resolution"].split(",")))
+    
+    if my_res[0]!=pos_res[0]:
+        print("Recalculating coordinates")
+        
+        for i in pos:
+            x,y = pos[i]
+            new_x = int(x*my_res[0]/pos_res[0])
+            new_y = int(y*my_res[1]/pos_res[1])
+            pos[i] = [new_x,new_y]
+            
     #shirt=.lower.contains("Y")
    
  #   status = getStatus(pos)
@@ -298,7 +197,7 @@ if __name__ == "__main__":
             break
 
     if not shirt:
-        saveRoomFromMP(name)
+        saveRoomFromMP(name,pos)
 
             
     input("Press ENTER to exit")

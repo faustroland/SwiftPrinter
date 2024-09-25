@@ -196,6 +196,19 @@ def enterData(xtable=0):
     pos=load_positions("positions.txt")
     
     settings = load_settings("settings.txt")
+    user32 = ctypes.windll.user32
+    my_res = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+    pos_res = list(map(int,settings["position_resolution"].split(",")))
+    
+    if my_res[0]!=pos_res[0]:
+        print("Recalculating coordinates")
+        for i in pos:
+            x,y = pos[i]
+            new_x = int(x*my_res[0]/pos_res[0])
+            new_y = int(y*my_res[1]/pos_res[1])
+            pos[i] = [new_x,new_y]
+
+            
     c_delay = float(settings["color_import_delay"])
     b_delay = float(settings["button_delay"])
     data_chunk_size = int(settings["data_chunk_size"])
@@ -283,7 +296,20 @@ if __name__ == "__main__":
        sys.stdout.write("Please respond with 'yes' or 'no'")
        
     pos=load_positions("positions.txt")
+    settings = load_settings("settings.txt")
+    user32 = ctypes.windll.user32
+    my_res = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+    pos_res = list(map(int,settings["position_resolution"].split(",")))
+    
+    if my_res[0]!=pos_res[0]:
+        print("Recalculating coordinates")
+        for i in pos:
+            x,y = pos[i]
+            new_x = int(x*my_res[0]/pos_res[0])
+            new_y = int(y*my_res[1]/pos_res[1])
+            pos[i] = [new_x,new_y]
 
+            
     name = enterData(xtab)
     
 
