@@ -108,6 +108,13 @@ def enterData(startat):
     
     importColors(pos,settings,c_delay,b_delay,colors,startat)
     saveRoomFromMP("Colors",pos)
+    while(True):
+        if (getStatus(pos) == 300):
+            sleep(8)
+            break
+        else:
+            escape()
+            sleep(1)
     importTables(pos,settings,c_delay,b_delay,data_chunk_size,chunks)
     return "tampName"
 

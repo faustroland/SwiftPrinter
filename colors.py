@@ -82,6 +82,12 @@ def importColors(pos,settings,c_delay,b_delay,colors,startat):
         waitForMenu("Custom",pos)
         click(pos["Custom"])
         while not waitForMenu("CUSTOM_COLOR_MENU_HEADER",pos):
+            hand_menu_opened,nothing = waitForMenu2("HAND",pos)
+            if hand_menu_opened:
+                escape()
+                sleep(1)
+                click(pos["MULTICOLOR_COLOR_BUTTON"])
+                sleep(1)                
             click(pos["Custom"])
             sleep(c_delay)
         click(pos["Custom_Input"],3)
