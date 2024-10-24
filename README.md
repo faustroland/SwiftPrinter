@@ -54,6 +54,12 @@ input and output.
 
 7) Save and reload/reset the room. It seats you properly.
 
+8) Go to Game Settings -> Experience -> PRESENCE and set Appear Online To "NO ONE" to avoid interuption from friend invites
+
+9) Go to Game Settings -> Notifications -> Notify Me When Friends Come Online and disable it. Notification disrupts the Importing status check usually screwing completely the color import process.
+
+10) Set Maker Pen Snapping to GRID (Affects position of Send Test Event button)
+
 
 Note: Once you import all colors it switches you to importing data. Once the print finishes, the seat will switch back to color importing.
 
@@ -144,6 +150,11 @@ The licence room can host only one person, but there is a "hangout area" where y
 
 
 *The license is bound to your account and is valid for an hour/day/week/month. So it's up to you how many images are you able to start printing within an hour.
+
+## TROUBLESHOOTING
+
+### My game crashes after pasting the data into the table
+Open the settings.txt and change the data_chunk_size to smaller value (100000,75000,50000,40000,30000) until it works for you.
 
 
 ## TODO: Breakdown if the individual chip options
