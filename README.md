@@ -15,6 +15,20 @@ You have to have python installed
 Join [Printing discord](https://discord.gg/GuzwRMsyW8)
 
 
+## Youtube Tutorials
+
+by **AmmowardenRR**
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/oPqGr90cl6s/0.jpg)](https://www.youtube.com/watch?v=oPqGr90cl6s&list=PLSgqZt6xUHdM_AF7eNe9dnTKqzRvmYZty)
+
+
+
+by **Hugambo** 
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/po1xGSOedJg/0.jpg)](https://www.youtube.com/watch?v=po1xGSOedJg)
+
+
+
 ## Tutorial:
 
 0) Install libraries for python
@@ -155,6 +169,22 @@ The licence room can host only one person, but there is a "hangout area" where y
 
 ### My game crashes after pasting the data into the table
 Open the settings.txt and change the data_chunk_size to smaller value (100000,75000,50000,40000,30000) until it works for you.
+
+### Unable to get Shirt Board position right
+To my knowledge, the first spawn of the board in the room is ALWAYS off. 🤷
+
+To avoid any mouse movement :
+
+1) Press TAB, open the Bagpack, spawn and then despawn the Board
+2) Grab Maker Pen, Write "Shirt" into the Test Event parameter field  ![Shirt Test Event](readme/ShirtTestEvent.png)
+3) Send Test Event
+4) Press TAB
+5) Spawn Shirt Board
+
+### Manual Data Table Entry
+If you want to enter the Data manually, you have to run manualTables.py, it creates files for each ingame Data Table, where you copy paste it.
+ ![Data Tables](readme/DataTables.png)
+
 
 
 ## TODO: Breakdown if the individual chip options
