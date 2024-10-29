@@ -81,7 +81,7 @@ def importColors(pos,settings,c_delay,b_delay,colors,startat):
 
         waitForMenu("Custom",pos)
         click(pos["Custom"])
-        while not waitForMenu("CUSTOM_COLOR_MENU_HEADER",pos):
+        if not waitForMenu("CUSTOM_COLOR_MENU_HEADER",pos):
             hand_menu_opened,nothing = waitForMenu2("HAND",pos)
             if hand_menu_opened:
                 escape()
