@@ -102,6 +102,8 @@ def enterData(startat):
     chunks = split_file("image_data.txt",data_chunk_size)
     colors = load_colors("image_hex.txt")
     lenchunks=len(chunks)
+    if lenchunks>22:
+        print("WARNING: NUMER OF DATA CHUNKS IS HIGHER THAN AWAILABLE DATA TABLES,\nincrease the chunk size in settings.txt")
     lencolors=len(colors)
     print(f"Importing {lencolors} colors and {lenchunks} TABLES")
 #    getActiveWindow()
