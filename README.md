@@ -47,7 +47,7 @@ pip install Pillow
 ![Fig.1 Image of Link Buttons](readme/Fig1.png)
 
 2) Empty your Dorm
-(don't use Delete All button, is bugged)
+(don't use Delete All button, it is bugged)
 
     ![Fig.2 Image of Reset Dorm on Rec.Net](readme/Fig2.png)
 
@@ -70,7 +70,7 @@ input and output.
 
 8) Go to Game Settings -> Experience -> PRESENCE and set Appear Online To "NO ONE" to avoid interuption from friend invites
 
-9) Go to Game Settings -> Notifications -> Notify Me When Friends Come Online and disable it. Notification disrupts the Importing status check usually screwing completely the color import process.
+9) Go to Game Settings -> Notifications -> Notify Me When Friends Come Online and disable it. Notification disrupts the Importing status check, usually screwing completely the color import process.
 
 10) Set Maker Pen Snapping to GRID (Affects position of Send Test Event button)
 
