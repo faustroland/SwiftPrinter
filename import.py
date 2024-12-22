@@ -181,6 +181,10 @@ if __name__ == "__main__":
     settings = load_settings("settings.txt")
     my_res = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
     pos_res = list(map(int,settings["position_resolution"].split(",")))
+
+    if my_res[0] not in [1920,1600,1024]:
+        print("\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\nUNSUPORTED RESOLUTION\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!!!\n")
+        print("Supported resolutions are 1920x1080, 1600x1900, 1024x768")
     
     if my_res[0]!=pos_res[0]:
         print("Recalculating coordinates")
