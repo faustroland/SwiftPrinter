@@ -41,7 +41,10 @@ def importColors(pos,settings,c_delay,b_delay,colors,startat):
 
         while(True):  # here is handled the transition to the next marker
             sleep(0.2)
-            position = getStatus(pos)
+            position=999
+            while(position>215):
+                sleep(0.2)
+                position = getStatus(pos)
             print("My position:",position)
             if position < iC: 
                 rightclick([int(screensize[0]/2),int(screensize[1]/2)])

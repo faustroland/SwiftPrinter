@@ -103,7 +103,7 @@ def update_settings_loop(settings):
                 position_name = list(settings.keys())[choice - 1]
                 print(f"Move the mouse cursor to position --> {position_name} <-- and turn on Caps Lock.")
                 new_position = wait_until_capslock_on()
-                kp(0x14,0.01,0.01)
+                
                 settings[position_name] = new_position
                 win32api.SetCursorPos((1,1))
                 sleep(1)

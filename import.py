@@ -180,6 +180,7 @@ if __name__ == "__main__":
     pos=load_positions("positions.txt")
     settings = load_settings("settings.txt")
     my_res = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+    print("Resolution:",my_res)
     pos_res = list(map(int,settings["position_resolution"].split(",")))
 
     if my_res[0] not in [1920,1600,1024]:
